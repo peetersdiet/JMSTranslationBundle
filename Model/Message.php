@@ -202,16 +202,17 @@ class Message
 
         if (null !== $desc = $message->getDesc()) {
             $this->desc = $desc;
+            $this->localeString = null;
+            if ($localeString = $message->getLocaleString()) {
+                $this->localeString = $localeString;
+            }
         }
 
         foreach ($message->getSources() as $source) {
             $this->addSource($source);
         }
 
-        $this->setNew($message->isNew());
-        if ($localeString = $message->getLocaleString()) {
-            $this->localeString = $localeString;
-        }
+        $this->new = $message->isNew();
     }
 
     /**
